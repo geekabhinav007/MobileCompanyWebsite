@@ -7,6 +7,9 @@
     "test": "jest",
     "start": "node server.js"
   },
+  "engines": {
+    "node": ">=14.20.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/geekabhinav007/MobileCompanyWebsite.git"
