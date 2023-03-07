@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +9,14 @@
 	<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
 </head>
+
 <body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
 				<a class="navbar-brand" href="#">Mobile Selling Company</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
@@ -36,48 +39,77 @@
 		</nav>
 	</header>
 	<main>
-        <section id="contact">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h2>Contact Us</h2>
-                        <p>Please fill out the form below to contact us.</p>
-                        <form>
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter your name">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                                    placeholder="Enter your email">
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea class="form-control" id="message" rows="3"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="https://via.placeholder.com/400x300.png?text=Contact+Us+Image" alt="Contact Us Image"
-                            class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
+		<section id="contact">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h2>Contact Us</h2>
+						<p>Please fill out the form below to contact us.</p>
+						<form id="contact-form">
+							<div class="form-group">
+								<label for="name">Name</label>
+								<input type="text" class="form-control" id="name" name="name"
+									placeholder="Enter your name">
+							</div>
+							<div class="form-group">
+								<label for="email">Email address</label>
+								<input type="email" class="form-control" id="email" name="email"
+									aria-describedby="emailHelp" placeholder="Enter your email">
+							</div>
+							<div class="form-group">
+								<label for="message">Message</label>
+								<textarea class="form-control" id="message" name="message" rows="3"></textarea>
+							</div>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+
+					</div>
+					<div class="col-md-6">
+						<img src="https://via.placeholder.com/400x300.png?text=Contact+Us+Image" alt="Contact Us Image"
+							class="img-fluid">
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
 	<footer class="py-3 bg-light fixed-bottom mt-auto">
 		<div class="container">
-		  <p class="text-center">&copy; 2023 Mobile Selling Company. All rights reserved.</p>
+			<p class="text-center">&copy; 2023 Mobile Selling Company. All rights reserved.</p>
 		</div>
-	  </footer>
-	  
+	</footer>
+
 	<!-- Bootstrap JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 
-</body>
-</html>
+	<script>
+		const form = document.getElementById('contact-form');
 
-    
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+
+  // Send the form data to the server-side route using fetch
+  fetch('/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, email, message })
+  })
+    .then(response => response.text())
+    .then(data => {
+      alert(data);
+      form.reset();
+    })
+    .catch(err => console.log(err));
+});
+
+	</script>
+</body>
+
+
+</html>
