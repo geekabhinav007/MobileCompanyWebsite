@@ -71,7 +71,6 @@ app.post('/register', async (req, res) => {
   try {
     // Save the new user object to the database
     await newUser.save();
-    res.send('Registration successful');
     console.log('Registration successful');
     res.redirect('/index.html');
   } catch (error) {
