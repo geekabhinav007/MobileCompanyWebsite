@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration Page</title>
+	<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+	<main>
+		<section id="registration">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 offset-md-3">
+						<h2>Registration</h2>
+						<form id="registration-form">
+							<div class="form-group">
+								<label for="username">Username</label>
+								<input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
+							</div>
+							<div class="form-group">
+								<label for="password">Password</label>
+								<input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+							</div>
+							<div class="form-group">
+								<label for="confirm-password">Confirm Password</label>
+								<input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Confirm your password">
+							</div>
+							<button type="register" class="btn btn-primary">Register</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+    <!-- Bootstrap JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        const form = document.getElementById('registration-form');
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+      
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+          const confirmPassword = document.getElementById('confirm-password').value;
+      
+          // Send the form data to the server-side route using fetch
+          fetch('/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password, confirmPassword })
+          })
+            .then(response => response.text())
+            .then(data => {
+              alert(data);
+              form.reset();
+            })
+            .catch(err => console.log(err));
+        });
+      </script>
+      
+</body>
+</html>
