@@ -1,10 +1,3 @@
-function isAuthenticated(req, res, next) {
-  if (req.session && req.session.isAuthenticated) {
-    return next();
-  }
-  res.redirect('/login.html');
-}
-
 
 // Require the necessary modules
 const express = require('express'); // Express web framework
@@ -18,6 +11,17 @@ const app = express();
 // Serve static files from the public directory
 app.use(express.static('public'));
 
+// Set up a route for the login page
+app.get('/index.html', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+function isAuthenticated(req, res, next) {
+  if (req.session && req.session.isAuthenticated) {
+    return next();
+  }
+  res.redirect('/index.html');
+}
 
 // Route to serve Bootstrap CSS from node_modules directory
 app.get('/node_modules/bootstrap/dist/css/bootstrap.min.css', function (req, res) {
@@ -69,7 +73,7 @@ app.post('/register', async (req, res) => {
     await newUser.save();
     res.send('Registration successful');
     console.log('Registration successful');
-    res.redirect('/login.html');
+    res.redirect('/index.html');
   } catch (error) {
     console.error(error);
     res.status(500).send('An error occurred');
@@ -78,7 +82,7 @@ app.post('/register', async (req, res) => {
 
 
 // Handle login form submissions
-app.post('/login', async (req, res) => {
+app.post('/index', async (req, res) => {
   const { username, password } = req.body;
 
 
@@ -92,7 +96,7 @@ app.post('/login', async (req, res) => {
     if (user.password !== password) {
       return res.status(400).send('Incorrect password');
     }
-    // If both username and password are correct, redirect to the index.html page
+    // If both username and password are correct, redirect to the home.html page
     res.redirect('/index.html');
   } catch (error) {
     console.error(error);
@@ -122,9 +126,14 @@ app.post('/submit', async (req, res) => {
 
 // Set up a route for the login page
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/login.html');
+  res.sendFile(__dirname + 'index.html');
 });
 
+
+// Set up a route for the index page
+app.get('/index.html', isAuthenticated, (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 
 // Start the server and listen for incoming connections
 const port = process.env.PORT || 4000; // Use the value of the PORT environment variable, or 4000 if it is not set
