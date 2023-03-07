@@ -94,8 +94,8 @@
 											<div class="form-outline mb-4">
 												<label class="form-label" for="confirm-password">Confirm
 													Password</label>
-												<input type="confirm-password" id="confirm-password"
-													class="form-control" placeholder="Confirm Password" />
+												<input type="password" id="confirm-password" class="form-control"
+													placeholder="Confirm Password" />
 
 											</div>
 
@@ -134,10 +134,17 @@
 				},
 				body: JSON.stringify({ username, password, confirmPassword })
 			})
-				.then(response => response.text())
-				.then(data => {
-					form.reset();
-					window.location.href = 'index.html'; // Redirect to index.html
+				.then(response => {
+					if (response.ok) {
+						// Registration successful, redirect to index.html
+						form.reset();
+						window.location.href = 'index.html';
+					} else {
+						// Registration failed, show the error message in an alert box
+						response.text().then(errorMessage => {
+							alert(errorMessage);
+						});
+					}
 				})
 				.catch(err => console.log(err));
 		});

@@ -61,24 +61,30 @@ app.use(express.json());
 // Handle registration form submissions
 app.post('/register', async (req, res) => {
   const { username, password, confirmPassword } = req.body;
-  // Check if the passwords match
 
+  // Check if the passwords match
   if (password !== confirmPassword) {
     return res.status(400).send('Passwords do not match');
   }
+
+  // Check if the user already exists in the database
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    return res.status(400).send('User already exists');
+  }
+
   // Create a new user object using the User model
   const newUser = new User({ username, password });
   try {
     // Save the new user object to the database
     await newUser.save();
     console.log('Registration successful');
-    res.redirect('/index.html');
+    res.status(200).send('Registration successful');
   } catch (error) {
     console.error(error);
     res.status(500).send('An error occurred');
   }
 });
-
 
 // Handle login form submissions
 app.post('/index', async (req, res) => {

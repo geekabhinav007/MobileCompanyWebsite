@@ -2,3 +2,7 @@
 node_modules/
 
 server.back.js
+
+# *back* is a suffix I use to indicate that this file is a backup of the original file. I use this to keep track of the changes I make to the original file.
+
+*back* 
