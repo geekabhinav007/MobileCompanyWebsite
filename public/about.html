@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +9,17 @@
 	<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
 </head>
+
 <body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
 				<a class="navbar-brand" href="#">Mobile Selling Company</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				
+
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item">
@@ -31,40 +34,64 @@
 						<li class="nav-item">
 							<a class="nav-link" href="contact.html">Contact</a>
 						</li>
+						</li>
+						<li class="nav-item">
+							<button id="logout-btn" class="btn btn-danger">Logout</button>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
-	
-    <main>
-        <section id="about">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h2>About Us</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis luctus enim in risus aliquam,
-                            ac mollis risus rutrum. Maecenas volutpat ex a odio tristique, vel euismod nisi scelerisque.
-                            Nulla facilisi.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="https://via.placeholder.com/400x300.png?text=About+Us+Image" alt="About Us Image"
-                            class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+
+	<main>
+		<section id="about">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h2>About Us</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis luctus enim in risus aliquam,
+							ac mollis risus rutrum. Maecenas volutpat ex a odio tristique, vel euismod nisi scelerisque.
+							Nulla facilisi.</p>
+					</div>
+					<div class="col-md-6">
+						<img src="https://via.placeholder.com/400x300.png?text=About+Us+Image" alt="About Us Image"
+							class="img-fluid">
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 	<footer class="py-3 bg-light fixed-bottom mt-auto">
-        <div class="container">
-          <p class="text-center">&copy; 2023 Mobile Selling Company. All rights reserved.</p>
-        </div>
-      </footer>
-      
+		<div class="container">
+			<p class="text-center">&copy; 2023 Mobile Selling Company. All rights reserved.</p>
+		</div>
+	</footer>
+
 	<!-- Bootstrap JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+	<script>
 
-	
+
+		const logoutBtn = document.getElementById('logout-btn');
+
+		logoutBtn.addEventListener('click', e => {
+			e.preventDefault();
+
+			// Send a request to the server-side logout route using fetch
+			fetch('/logout', {
+				method: 'POST'
+			})
+				.then(response => response.text())
+				.then(data => {
+					window.location.href = 'index.html'; // Redirect to login.html
+				})
+				.catch(err => console.log(err));
+		});
+
+
+	</script>
+
 </body>
 
 

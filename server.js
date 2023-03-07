@@ -110,6 +110,19 @@ app.post('/index', async (req, res) => {
 });
 
 
+// Handle logout
+app.get('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('An error occurred');
+    } else {
+      res.redirect('/index.html');
+    }
+  });
+});
+
+
 // Route to handle form submissions
 app.post('/submit', async (req, res) => {
   const { name, email, message } = req.body;

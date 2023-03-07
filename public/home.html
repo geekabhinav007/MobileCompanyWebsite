@@ -34,6 +34,10 @@
 						<li class="nav-item">
 							<a class="nav-link" href="contact.html">Contact</a>
 						</li>
+						</li>
+						<li class="nav-item">
+							<button id="logout-btn" class="btn btn-danger">Logout</button>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -50,13 +54,31 @@
 	</main>
 	<footer class="py-3 bg-light fixed-bottom mt-auto">
 		<div class="container">
-		  <p class="text-center">&copy; 2023 Mobile Selling Company. All rights reserved.</p>
+			<p class="text-center">&copy; 2023 Mobile Selling Company. All rights reserved.</p>
 		</div>
-	  </footer>
-	  
+	</footer>
+
 	<!-- Bootstrap JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 
+	<script>
+
+		const logoutBtn = document.getElementById('logout-btn');
+
+		logoutBtn.addEventListener('click', e => {
+			e.preventDefault();
+
+			// Send a request to the server-side logout route using fetch
+			fetch('/logout', {
+				method: 'POST'
+			})
+				.then(response => response.text())
+				.then(data => {
+					window.location.href = 'index.html'; // Redirect to login.html
+				})
+				.catch(err => console.log(err));
+		});
+	</script>
 
 </body>
 
