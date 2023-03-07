@@ -1,0 +1,34 @@
+{
+  "name": "mobilecompanywebsite",
+  "version": "1.0.0",
+  "description": "A website with Login facility and also have Contact form with fully functional Dtabase atached",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geekabhinav007/MobileCompanyWebsite.git"
+  },
+  "keywords": [
+    "MongoDb",
+    "Express",
+    "Node",
+    "HTML",
+    "Css",
+    "Bootstrap"
+  ],
+  "author": "Kumar Abhinav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geekabhinav007/MobileCompanyWebsite/issues"
+  },
+  "homepage": "https://github.com/geekabhinav007/MobileCompanyWebsite#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.1",
+    "nodemon": "^2.0.21"
+  }
+}
